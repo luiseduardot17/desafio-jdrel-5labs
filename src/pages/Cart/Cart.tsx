@@ -18,23 +18,30 @@ const Cart = () => {
           <h3>{vehicle.name}</h3>
           <p>Valor: {formatValue(vehicle.cost_in_credits)}</p>
           <button onClick={() => handleRemoveFromCart(vehicle.id)}>
-            <RiDeleteBin6Line />
+            <RiDeleteBin6Line /> REMOVER
           </button>
         </div>
       ))}
 
       {cartVehicles.length > 0 && (
         <div>
-          <button>
-            <Link to="/checkout">Ir para o Checkout</Link>
-          </button>
+          <Link to="/checkout">
+            <button>FECHAR PEDIDO</button>
+          </Link>
+        </div>
+      )}
+
+      {cartVehicles.length == 0 && (
+        <div>
+          <b>O seu carrinho está vazio.</b>
+          <span>Deseja olhar outros veículos similares?</span>
         </div>
       )}
 
       <div>
-        <button>
-          <Link to="/">Voltar à lista de veículos</Link>
-        </button>
+        <Link to="/">
+          <button>CONTINUAR COMPRANDO</button>
+        </Link>
       </div>
     </div>
   )
