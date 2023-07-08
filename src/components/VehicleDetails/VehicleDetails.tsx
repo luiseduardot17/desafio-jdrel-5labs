@@ -23,6 +23,23 @@ const VehicleDetails = () => {
 
   const [filmNames, setFilmNames] = useState<string[]>([]);
 
+  const fetchFilmNames = async () => {
+    if (!vehicleStore.vehicle) {
+      return []; // Retorna um array vazio caso vehicleStore.vehicle seja nulo
+    }
+
+    const filmUrls = vehicleStore.vehicle.films;
+    const filmPromises = filmUrls.map(fetchFilmName); // Array de promises das requisições
+
+    const filmResponses = await Promise.all(filmPromises); // Aguarda todas as requisições
+
+    const filmNames = filmResponses.map((response) => {
+      return response.data?.title || ""; // Extrai o título do filme da resposta
+    });
+
+    return filmNames;
+  };
+
   useEffect(() => {
     const fetchVehicleDetails = async () => {
       try {
@@ -52,7 +69,8 @@ const VehicleDetails = () => {
   const handleAddToCart = () => {
     const { vehicle } = vehicleStore; // Obtem o veículo do vehicleStore
     if (vehicle) {
-      vehicleStore.addToCart(vehicle); // Adiciona o veículo ao carrinho
+      const vehicleWithId = { ...vehicle, id: id! }; // Adicione o ID ao objeto do veículo
+      vehicleStore.addToCart(vehicleWithId);
       navigate('/cart');
     }
   };
@@ -65,24 +83,8 @@ const VehicleDetails = () => {
     return <div>Carregando informações do veículo...</div>;
   }
 
-  const { name, model, manufacturer, cost_in_credits, length, max_atmosphering_speed, crew, passengers, cargo_capacity, consumables, vehicle_class} = vehicleStore.vehicle!;
+  const { name, model, manufacturer, cost_in_credits, length, max_atmosphering_speed, crew, passengers, cargo_capacity, consumables, vehicle_class } = vehicleStore.vehicle!;
 
-  const fetchFilmNames = async () => {
-    if (!vehicleStore.vehicle) {
-      return []; // Retorna um array vazio caso vehicleStore.vehicle seja nulo
-    }
-    
-    const filmUrls = vehicleStore.vehicle.films;
-    const filmPromises = filmUrls.map(fetchFilmName); // Array de promises das requisições
-
-    const filmResponses = await Promise.all(filmPromises); // Aguarda todas as requisições
-
-    const filmNames = filmResponses.map((response) => {
-      return response.data?.title || ""; // Extrai o título do filme da resposta
-    });
-
-    return filmNames;
-  };
 
   return (
     <div>
@@ -103,9 +105,9 @@ const VehicleDetails = () => {
           <li key={index}>{filmName}</li>
         ))}
       </ul>
-      
+
       <p>Créditos Galácticos: {formatValue(cost_in_credits)}</p>
-      
+
       <button onClick={handleAddToCart}>Adicionar ao Carrinho</button>
       <button onClick={handleGoBack}>Voltar</button>
     </div>
