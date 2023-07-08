@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes as Switch } from "react-router-dom"
+import { Element } from 'react-scroll';
 import Home from "../pages/Home/Home"
 import Cart from "../pages/Cart/Cart"
 import Checkout from "../pages/Checkout/Checkout"
@@ -11,6 +12,7 @@ const Routes = () => {
     return (
         <BrowserRouter>
             <Navbar/>
+            <Element name="top">
             <Switch>
                 <Route path="/" element={<Home />} />
                 <Route path="vehicles/:id" element={<VehicleDetails />} />
@@ -18,6 +20,7 @@ const Routes = () => {
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/success" element={<Success />} />
             </Switch>
+            </Element>
         </BrowserRouter>
     )
 }
