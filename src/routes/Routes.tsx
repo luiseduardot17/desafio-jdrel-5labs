@@ -4,11 +4,13 @@ import Cart from "../pages/Cart/Cart"
 import Checkout from "../pages/Checkout/Checkout"
 import Success from "../pages/Success/Success"
 import VehicleDetails from "../components/VehicleDetails/VehicleDetails"
+import Navbar from "../components/Navbar/Navbar"
 
 
 const Routes = () => {
     return (
         <BrowserRouter>
+            <Navbar/>
             <Switch>
                 <Route path="/" element={<Home />} />
                 <Route path="vehicles/:id" element={<VehicleDetails />} />
