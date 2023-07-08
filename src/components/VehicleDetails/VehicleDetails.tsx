@@ -10,6 +10,13 @@ const fetchFilmName = async (url: string) => {
   return { data: { title } };
 };
 
+const formatValue = (value: string | number): string => {
+  if (value === "unknown") {
+    return "$ 20.000";
+  }
+  return `$ ${Number(value).toLocaleString()}`;
+};
+
 const VehicleDetails = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -82,21 +89,22 @@ const VehicleDetails = () => {
       <h2>Detalhes do Veículo - ID {id}</h2>
       <p>Nome: {name}</p>
       <p>Modelo: {model}</p>
+      <p>Classe: {vehicle_class}</p>
       <p>Fabricante: {manufacturer}</p>
-      <p>Creditos galacticos: {cost_in_credits}</p>
-      <p>{length}</p>
-      <p>{max_atmosphering_speed}</p>
-      <p>{crew}</p>
-      <p>{passengers}</p>
-      <p>{cargo_capacity}</p>
-      <p>{consumables}</p>
-      <p>{vehicle_class}</p>
-      <p>Filmes:</p>
+      <p>Comprimento em metros: {length}</p>
+      <p>Velocidade máxima deste veículo na atmosfera: {max_atmosphering_speed}</p>
+      <p>Pessoas necessárias para operar ou pilotar este veículo: {crew}</p>
+      <p>Passageiros que este veículo pode transportar: {passengers}</p>
+      <p>Carga máxima em quilogramas: {cargo_capacity}</p>
+      <p>Tempo máximo que este veículo pode fornecer consumíveis para toda a sua tripulação sem ter que reabastecer: {consumables}</p>
+      <p>Filmes em que este veículo apareceu:</p>
       <ul>
         {filmNames.map((filmName, index) => (
           <li key={index}>{filmName}</li>
         ))}
       </ul>
+      
+      <p>Créditos Galácticos: {formatValue(cost_in_credits)}</p>
       
       <button onClick={handleAddToCart}>Adicionar ao Carrinho</button>
       <button onClick={handleGoBack}>Voltar</button>
