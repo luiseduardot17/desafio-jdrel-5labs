@@ -31,6 +31,12 @@ export class VehicleStore {
       this.cartVehicles.push(vehicle); // Adiciona o veículo ao carrinho
     });
   };
+
+  removeFromCart = (vehicleId: string) => {
+    this.cartVehicles = this.cartVehicles.filter(
+      (vehicle) => vehicle.id !== vehicleId
+    );
+  };
 }
 
 const vehicleStore = new VehicleStore();
