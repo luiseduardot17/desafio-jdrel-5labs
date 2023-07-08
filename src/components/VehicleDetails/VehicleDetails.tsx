@@ -1,11 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import vehicleStore from '../../stores/VehicleStore';
+import http from '../../services/swapi';
+
+const fetchFilmName = async (url: string) => {
+  const response = await http.get(url);
+  const title = response.data?.title || "";
+  return { data: { title } };
+};
 
 const VehicleDetails = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+
+  const [filmNames, setFilmNames] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchVehicleDetails = async () => {
@@ -40,7 +49,33 @@ const VehicleDetails = () => {
     return <div>Carregando informações do veículo...</div>;
   }
 
-  const { name, model, manufacturer } = vehicleStore.vehicle!;
+  const { name, model, manufacturer, cost_in_credits, length, max_atmosphering_speed, crew, passengers, cargo_capacity, consumables, vehicle_class} = vehicleStore.vehicle!;
+
+  const fetchFilmNames = async () => {
+    if (!vehicleStore.vehicle) {
+      return []; // Retorna um array vazio caso vehicleStore.vehicle seja nulo
+    }
+    
+    const filmUrls = vehicleStore.vehicle.films;
+    const filmPromises = filmUrls.map(fetchFilmName); // Array de promises das requisições
+
+    const filmResponses = await Promise.all(filmPromises); // Aguarda todas as requisições
+
+    const filmNames = filmResponses.map((response) => {
+      return response.data?.title || ""; // Extrai o título do filme da resposta
+    });
+
+    return filmNames;
+  };
+
+  useEffect(() => {
+    const getFilmNames = async () => {
+      const names = await fetchFilmNames();
+      setFilmNames(names);
+    };
+
+    getFilmNames();
+  }, []);
 
   return (
     <div>
@@ -48,6 +83,21 @@ const VehicleDetails = () => {
       <p>Nome: {name}</p>
       <p>Modelo: {model}</p>
       <p>Fabricante: {manufacturer}</p>
+      <p>Creditos galacticos: {cost_in_credits}</p>
+      <p>{length}</p>
+      <p>{max_atmosphering_speed}</p>
+      <p>{crew}</p>
+      <p>{passengers}</p>
+      <p>{cargo_capacity}</p>
+      <p>{consumables}</p>
+      <p>{vehicle_class}</p>
+      <p>Filmes:</p>
+      <ul>
+        {filmNames.map((filmName, index) => (
+          <li key={index}>{filmName}</li>
+        ))}
+      </ul>
+      
       <button onClick={handleAddToCart}>Adicionar ao Carrinho</button>
       <button onClick={handleGoBack}>Voltar</button>
     </div>
