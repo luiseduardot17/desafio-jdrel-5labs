@@ -15,7 +15,7 @@ const VehicleList = () => {
     useEffect(() => {
         const fetchVehicles = async () => {
             try {
-                const response = await http.get<IApiResponse>('/', {
+                const response = await http.get<IApiResponse>('vehicles/', {
                     params: {
                         page: currentPage,
                     },
