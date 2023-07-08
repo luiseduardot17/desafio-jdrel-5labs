@@ -5,6 +5,7 @@ import IVehicle from "../interfaces/IVehicles";
 export class VehicleStore {
   vehicles: IVehicle[] = [];
   vehicle: IVehicle | null = null; // Propriedade vehicle para armazenar os detalhes do veículo
+  cartVehicles: IVehicle[] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -27,7 +28,7 @@ export class VehicleStore {
 
   addToCart = (vehicle: IVehicle) => {
     runInAction(() => {
-      this.vehicles.push(vehicle); // Adiciona o veículo ao carrinho
+      this.cartVehicles.push(vehicle); // Adiciona o veículo ao carrinho
     });
   };
 }
