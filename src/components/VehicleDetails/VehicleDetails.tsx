@@ -40,6 +40,15 @@ const VehicleDetails = () => {
     fetchVehicleDetails();
   }, [id, navigate]);
 
+  useEffect(() => {
+    const getFilmNames = async () => {
+      const names = await fetchFilmNames();
+      setFilmNames(names);
+    };
+
+    getFilmNames();
+  }, []);
+
   const handleAddToCart = () => {
     const { vehicle } = vehicleStore; // Obtem o veículo do vehicleStore
     if (vehicle) {
@@ -74,15 +83,6 @@ const VehicleDetails = () => {
 
     return filmNames;
   };
-
-  useEffect(() => {
-    const getFilmNames = async () => {
-      const names = await fetchFilmNames();
-      setFilmNames(names);
-    };
-
-    getFilmNames();
-  }, []);
 
   return (
     <div>
