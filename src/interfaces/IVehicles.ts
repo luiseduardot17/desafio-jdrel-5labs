@@ -1,4 +1,5 @@
 export default interface IVehicle {
+    id: string;
     name: string;
     model: string;
     manufacturer: string;
