@@ -12,7 +12,7 @@ export class VehicleStore {
 
   fetchVehicleDetails = async (id: string) => {
     try {
-      const response = await http.get(`/${id}`);
+      const response = await http.get(`vehicles/${id}`);
       runInAction(() => {
         this.vehicle = response.data;
       });
