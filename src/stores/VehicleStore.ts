@@ -33,10 +33,14 @@ export class VehicleStore {
   };
 
   removeFromCart = (vehicleId: string) => {
-    this.cartVehicles = this.cartVehicles.filter(
+    this.cartVehicles = this.cartVehicles.filter( // remove o veículo do carrinho
       (vehicle) => vehicle.id !== vehicleId
     );
   };
+
+  clearCart() {
+    this.cartVehicles = []; // limpa o carrinho após a compra
+  }
 }
 
 const vehicleStore = new VehicleStore();
