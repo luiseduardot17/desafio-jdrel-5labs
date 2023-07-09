@@ -4,6 +4,8 @@ import { NavigateFunction } from 'react-router-dom';
 import * as Yup from 'yup';
 import http from '../../services/viacep';
 import ICheckoutForm from '../../interfaces/ICheckoutForm';
+import { readDbFile, writeDbFile } from '../../utils/dbUtils';
+import { saveOrder } from "../../utils/orderUtils";
 
 const CheckoutForm = ({ navigate }: { navigate: NavigateFunction }) => {
     const formikRef = useRef<FormikProps<ICheckoutForm>>(null!);
@@ -43,11 +45,16 @@ const CheckoutForm = ({ navigate }: { navigate: NavigateFunction }) => {
         }
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (formikRef.current) {
             const values = formikRef.current.values;
             console.log('Compra efetuada!');
             console.log(values);
+
+            const db = readDbFile();
+            db.push(values);
+            writeDbFile(db);
+            saveOrder(values);
             navigate('/success');
         }
     };
