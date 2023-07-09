@@ -6,6 +6,7 @@ import http from '../../services/viacep';
 import ICheckoutForm from '../../interfaces/ICheckoutForm';
 import { readDbFile, writeDbFile } from '../../utils/dbUtils';
 import { saveOrder } from "../../utils/orderUtils";
+import vehicleStore from '../../stores/VehicleStore';
 
 const CheckoutForm = ({ navigate }: { navigate: NavigateFunction }) => {
     const formikRef = useRef<FormikProps<ICheckoutForm>>(null!);
@@ -45,11 +46,16 @@ const CheckoutForm = ({ navigate }: { navigate: NavigateFunction }) => {
         }
     };
 
+    const handleCheckout = () => {
+        vehicleStore.clearCart(); // Esvaziar o carrinho
+    };
+
     const handleSubmit = async () => {
         if (formikRef.current) {
             const values = formikRef.current.values;
             console.log('Compra efetuada!');
             console.log(values);
+            handleCheckout();
 
             const db = readDbFile();
             db.push(values);
