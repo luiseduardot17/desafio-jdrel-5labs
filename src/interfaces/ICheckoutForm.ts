@@ -10,4 +10,5 @@ export default interface ICheckoutForm {
     cidade: string;
     bairro: string;
     uf: string;
+    paymentType: string;
 }
