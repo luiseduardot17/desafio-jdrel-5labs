@@ -3,6 +3,7 @@ import http from '../../services/swapi'
 import IVehicle from '../../interfaces/IVehicles'
 import VechicleItem from '../VehicleItem/VehicleItem'
 import IApiResponse from '../../interfaces/IApiResponse'
+import style from './VehicleList.module.css'
 
 const VehicleList = () => {
 
@@ -41,12 +42,16 @@ const VehicleList = () => {
     };
 
     return (
-        <div>
-            <h2>Lista de Veiculos</h2>
-            {vehicles.map((vehicle, index) => (
-                <VechicleItem key={index} vehicle={vehicle} />
-            ))}
-            <div>
+        <div className={style.Container}>
+            <div className={style.Title}>
+            <h2>Lista de Veículos</h2>
+            </div>
+            <div className={style.vehicleContainer}>
+                {vehicles.map((vehicle) => (
+                    <VechicleItem key={vehicle.id} vehicle={vehicle} />
+                ))}
+            </div>
+            <div className={style.pagination}>
                 <button onClick={handlePreviousPage} disabled={currentPage === 1}>
                     Página Anterior
                 </button>
