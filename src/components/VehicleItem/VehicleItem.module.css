@@ -1,0 +1,51 @@
+.vehicleCard{
+    width: 100%;
+    height: 400px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(255, 255, 0, 0.2);
+}
+
+.Container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+}
+
+.vehicleImage{
+    width: 50%;
+
+    background-color: rgb(92, 87, 87);
+}
+
+.vehicleInfos{
+    width: 50%;
+    margin-left: 5px;
+    margin-right: 10px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    text-align: justify;
+}
+
+.vehicleInfos span{
+    font-weight: bold;
+    color: yellow;
+}
+
+.Link{
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
