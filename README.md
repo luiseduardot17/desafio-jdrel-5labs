@@ -2,7 +2,7 @@
 
 <h3>🚧 EM DESENVOLVIMENTO 🚧 </h3>
 
-<img src="/src/assets/millennium-falcon.svg"/>
+<img src="/public/logo-swve.png"/>
 
 </div>
 
