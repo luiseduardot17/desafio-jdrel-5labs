@@ -1,0 +1,32 @@
+.Container {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.Title {
+    display: flex;
+    justify-content: center;
+}
+
+.vehicleContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
+    grid-gap: 20px;
+    justify-items: center;
+}
+
+.pagination {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    gap: 20px;
+    padding: 20px;
+
+    display: flex;
+    justify-content: center;
+}
