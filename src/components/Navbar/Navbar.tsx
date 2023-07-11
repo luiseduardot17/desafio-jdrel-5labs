@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { RiShoppingCartLine } from 'react-icons/ri';
+import { BsCart3 } from 'react-icons/bs';
 import style from './Navbar.module.css'
 
 const Navbar = () => {
@@ -9,13 +9,13 @@ const Navbar = () => {
             <div className={style.navbar}>
                 <div className={style.image}></div>
                 <nav>
-                    <a href='/'>Início</a>
-                    <a>Veículos</a>
-                    <a>Sobre</a>
+                    <Link to='/'>Início</Link>
+                    <Link to='/vehicles'>Veículos</Link>
+                    <Link to='/'>Sobre</Link>
                 </nav>
                 <div className={style.divButton}>
                     <Link to="/cart">
-                        <button className={style.buttonCart}><RiShoppingCartLine /> Carrinho</button>
+                        <button className={style.buttonCart}><BsCart3/> Carrinho</button>
                     </Link>
                 </div>
             </div>
