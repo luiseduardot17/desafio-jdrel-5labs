@@ -3,18 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import vehicleStore from '../../stores/VehicleStore';
 import http from '../../services/swapi';
+import { formatValue } from "../../utils/utils";
 
 const fetchFilmName = async (url: string) => {
   const response = await http.get(url);
   const title = response.data?.title || "";
   return { data: { title } };
-};
-
-const formatValue = (value: string | number): string => {
-  if (value === "unknown") {
-    return "$ 20.000";
-  }
-  return `$ ${Number(value).toLocaleString()}`;
 };
 
 const VehicleDetails = () => {
