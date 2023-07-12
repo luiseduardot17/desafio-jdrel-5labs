@@ -15,6 +15,7 @@ h1 {
   line-height: normal;
 
   background: linear-gradient(to left, #FF3C6A, #FFAF36, #5200FF);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -25,7 +26,7 @@ h1 {
 }
 
 p {
-  width: 924px;
+  width: 50%;
   flex-shrink: 0;
 
   color: #FFF;
@@ -55,7 +56,7 @@ p {
   }
 
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-20px);
   }
 
   100% {
@@ -73,8 +74,8 @@ p {
 }
 
 .ellipse2 {
-  width: 720px;
-  height: 720px;
+  width: 50%;
+  height: 70%;
   flex-shrink: 0;
 
   position: fixed;
@@ -86,4 +87,27 @@ p {
   border-radius: 720px;
   background: linear-gradient(180deg, #B7BA31 0%, rgba(185, 113, 61, 0.00) 100%);
   filter: blur(300px);
+}
+
+@media screen and (max-width: 1024px) {
+  h1 {
+    font-size: 70px;
+  }
+
+  p {
+    width: 70%;
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+    
+}
+
+@media screen and (max-width: 425px) {
+    
+}
+
+@media screen and (max-width: 375px) {
+    
 }
