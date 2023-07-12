@@ -100,14 +100,45 @@ p {
   }
 }
 
-@media screen and (max-width: 768px) {
-    
-}
+@media screen and (max-width: 768px) {}
 
 @media screen and (max-width: 425px) {
-    
+  h1 {
+    font-size: 50px;
+  }
+
+  p {
+    width: 100%;
+    font-size: 24px;
+  }
+
+  .imageAnimation {
+    background-size: contain;
+  }
 }
 
 @media screen and (max-width: 375px) {
-    
+  h1 {
+    font-size: 45px;
+  }
+
+  p {
+    width: 100%;
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  h1 {
+    font-size: 35px;
+  }
+
+  p {
+    width: 100%;
+    font-size: 20px;
+  }
+
+  .imageAnimation {
+    height: 30vh;
+  }
 }
