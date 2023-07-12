@@ -12,8 +12,8 @@ import VehicleList from "../components/VehicleList/VehicleList";
 const Routes = () => {
     return (
         <BrowserRouter>
+        <Element name="top">
             <Navbar />
-            <Element name="top">
                 <Switch>
                     <Route path="/" element={<Home />} />
                     <Route path="/vehicles" element={<VehicleList />} />
