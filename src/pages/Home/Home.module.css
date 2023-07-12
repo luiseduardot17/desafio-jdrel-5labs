@@ -45,6 +45,7 @@ p {
   justify-content: end;
 
   bottom: 0;
+  font-family: 'Inter', sans-serif;
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
@@ -57,6 +58,7 @@ p {
   background-image: url(../../assets/x-34-landspeeder.png);
   background-repeat: no-repeat;
   background-position: center;
+  filter: drop-shadow(0 5px 5px #b1b2b3);
 }
 
 .imageContainer2 {
@@ -78,6 +80,7 @@ p {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+  filter: drop-shadow(0 -5px 5px #E1575D);
 }
 
 .imageAnimation3 {
@@ -108,6 +111,67 @@ p {
   border-radius: 720px;
   background: linear-gradient(180deg, #B7BA31 0%, rgba(185, 113, 61, 0.00) 100%);
   filter: blur(300px);
+}
+
+.faqContainer {
+  width: 100%;
+  height: 50vh;
+  padding-top: 10%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.faqContainer h3 {
+  color: #FFF;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.faqContainer ul {
+  width: 50%;
+  height: 80%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.faqContainer li {
+  width: 100%;
+  height: 20%;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-shrink: 0;
+
+  margin: 0 auto;
+  flex-shrink: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  border-radius: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.perguntas {
+  width: 90%;
+
+  color: #FFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  text-align: start;
 }
 
 @keyframes moveUpDown {
@@ -220,4 +284,10 @@ p {
   .imageAnimation {
     height: 30vh;
   }
+
+  .imageAnimation3 {
+    width: 100%;
+    height: 40vh;
+  }
+
 }
