@@ -17,18 +17,22 @@ const VehicleItem: React.FC<IVehicleItemProps> = ({ vehicle }) => {
   };
 
   const id = extractIdFromUrl(vehicle.url)
-
+  type URL = string;
+  const IMAGES_PATH: URL = '/vehicles/'
+  
   return (
     <div className={style.vehicleCard}>
       <div className={style.conteudo}>
-        <div className={style.vehicleImage}></div>
+        <div className={style.vehicleImage}>
+          <img src={IMAGES_PATH + `${id}.jpg`} alt={vehicle.name} />
+        </div>
         <div className={style.vehicleInfos}>
           <h3>{vehicle.name}</h3>
           <p><b>Modelo:</b> {vehicle.model}</p>
           <p><b>Fabricante:</b> {vehicle.manufacturer}</p>
           <p><b>Classe:</b> {vehicle.vehicle_class}</p>
           <div>
-            <span>Créditos Galácticos: {formatValue(vehicle.cost_in_credits)}</span>
+            <span>A PARTIR DE {formatValue(vehicle.cost_in_credits)} *</span>
           </div>
           <div>
             <Link to={`/vehicles/${id}`}>
