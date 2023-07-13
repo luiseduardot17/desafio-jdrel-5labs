@@ -1,0 +1,43 @@
+.loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.loader img {
+    width: 50%;
+    position: relative;
+
+    animation: diagonalAnimation 3s linear infinite;
+
+    filter: drop-shadow(10px 0 5px #5AB3F9);
+}
+
+.texto {
+
+    color: #FFF;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+
+    opacity: 0.800000011920929;
+}
+
+@keyframes diagonalAnimation {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+
+    50% {
+        transform: translateY(50%) translateX(-50%);
+    }
+
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+}
