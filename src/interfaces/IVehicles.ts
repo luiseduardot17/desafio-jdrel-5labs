@@ -16,4 +16,5 @@ export default interface IVehicle {
     created: string;
     edited: string;
     url: string;
+    image: string;
 }
