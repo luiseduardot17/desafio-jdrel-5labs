@@ -20,24 +20,22 @@ const VehicleItem: React.FC<IVehicleItemProps> = ({ vehicle }) => {
 
   return (
     <div className={style.vehicleCard}>
-      <div className={style.Container}>
-            <div className={style.vehicleImage}>
-              IMG
-            </div>
-            <div className={style.vehicleInfos}>
-              <h3>{vehicle.name}</h3>
-              <p>Modelo: {vehicle.model}</p>
-              <p>Fabricante: {vehicle.manufacturer}</p>
-              <p>Classe: {vehicle.vehicle_class}</p>
-              <div>
-                <span>Créditos Galácticos: {formatValue(vehicle.cost_in_credits)}</span>
-              </div>
-            </div>
-      </div>
-      <div className={style.Link}>
-        <Link to={`/vehicles/${id}`}>
-          <button>Ver detalhes</button>
-        </Link>
+      <div className={style.conteudo}>
+        <div className={style.vehicleImage}></div>
+        <div className={style.vehicleInfos}>
+          <h3>{vehicle.name}</h3>
+          <p><b>Modelo:</b> {vehicle.model}</p>
+          <p><b>Fabricante:</b> {vehicle.manufacturer}</p>
+          <p><b>Classe:</b> {vehicle.vehicle_class}</p>
+          <div>
+            <span>Créditos Galácticos: {formatValue(vehicle.cost_in_credits)}</span>
+          </div>
+          <div>
+            <Link to={`/vehicles/${id}`}>
+              <button className={style.Link}>Ver detalhes</button>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
