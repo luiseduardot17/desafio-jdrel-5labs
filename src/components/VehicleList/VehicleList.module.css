@@ -20,6 +20,23 @@
     justify-content: space-between;
 }
 
+.ellipse {
+    width: 50%;
+    height: 70%;
+    flex-shrink: 0;
+
+    position: fixed;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+
+    border-radius: 1161px;
+    opacity: 0.44999998807907104;
+    background: linear-gradient(180deg, #C173FF 0%, #70EEFF 100%);
+    filter: blur(200px);
+}
+
 .pagination {
     width: 100%;
     max-width: 800px;
