@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import vehicleStore from '../../stores/VehicleStore';
 import http from '../../services/swapi';
 import { formatValue } from "../../utils/utils";
+import style from './VehicleDetailse.module.css'
 
 const fetchFilmName = async (url: string) => {
   const response = await http.get(url);
@@ -69,41 +70,86 @@ const VehicleDetails = () => {
     }
   };
 
-  const handleGoBack = () => {
-    navigate('/');
-  };
-
   if (!vehicleStore.hasVehicle) {
     return <div>Carregando informações do veículo...</div>;
   }
 
-  const { name, model, manufacturer, cost_in_credits, length, max_atmosphering_speed, crew, passengers, cargo_capacity, consumables, vehicle_class } = vehicleStore.vehicle!;
+  const { name, model, manufacturer, cost_in_credits, length, max_atmosphering_speed, crew, passengers, cargo_capacity, consumables, vehicle_class, image } = vehicleStore.vehicle!;
 
 
   return (
-    <div>
-      <h2>Detalhes do Veículo - ID {id}</h2>
-      <p>Nome: {name}</p>
-      <p>Modelo: {model}</p>
-      <p>Classe: {vehicle_class}</p>
-      <p>Fabricante: {manufacturer}</p>
-      <p>Comprimento em metros: {length}</p>
-      <p>Velocidade máxima deste veículo na atmosfera: {max_atmosphering_speed}</p>
-      <p>Pessoas necessárias para operar ou pilotar este veículo: {crew}</p>
-      <p>Passageiros que este veículo pode transportar: {passengers}</p>
-      <p>Carga máxima em quilogramas: {cargo_capacity}</p>
-      <p>Tempo máximo que este veículo pode fornecer consumíveis para toda a sua tripulação sem ter que reabastecer: {consumables}</p>
-      <p>Filmes em que este veículo apareceu:</p>
-      <ul>
-        {filmNames.map((filmName, index) => (
-          <li key={index}>{filmName}</li>
-        ))}
-      </ul>
+    <div className={style.Container}>
+      <div className={style.ContainerImage}>
+        <div className={style.Nome}>
+          <h2>{name}</h2>
+        </div>
+        <img src={image} alt="image" />
+      </div>
 
-      <p>Créditos Galácticos: {formatValue(cost_in_credits)}</p>
+      <div className={style.Nome2}>
+        <h3>Sobre o {name}</h3>
+        <b>Créditos Galácticos: {formatValue(cost_in_credits)}</b>
+        <div>
+          <button className={style.ButtonAddCart} onClick={handleAddToCart}>Adicionar ao Carrinho</button>
+        </div>
+        <div>
+          <Link to="/vehicles">
+            <button className={style.ButtonBack}>Voltar</button>
+          </Link>
+        </div>
+      </div>
 
-      <button onClick={handleAddToCart}>Adicionar ao Carrinho</button>
-      <button onClick={handleGoBack}>Voltar</button>
+      <section className={style.Sobre}>
+        <div className={style.InfosPrincipais}>
+          <div>
+            <p>{model}</p>
+            <b>Modelo</b>
+          </div>
+          <div>
+            <p>{vehicle_class}</p>
+            <b>Classe</b>
+          </div>
+          <div>
+            <p>{manufacturer}</p>
+            <b>Fabricante</b>
+          </div>
+          <div>
+            <p>{max_atmosphering_speed} Km</p>
+            <b>Velocidade Máxima</b>
+          </div>
+        </div>
+
+        <div className={style.OutrasInfos}>
+          <div>
+            <b>Comprimento: </b>
+            <p>{length} m</p>
+          </div>
+          <div>
+            <b>Pessoas necessárias para operar ou pilotar este veículo: </b>
+            <p>{crew}</p>
+          </div>
+          <div>
+            <b>Passageiros que este veículo pode transportar: </b>
+            <p>{passengers}</p>
+          </div>
+          <div>
+            <b>Carga máxima: </b>
+            <p>{cargo_capacity} Kg</p>
+          </div>
+          <div>
+            <b>Tempo máximo que este veículo pode fornecer consumíveis para toda a sua tripulação sem ter que reabastecer: </b>
+            <p>{consumables}</p>
+          </div>
+          <div>
+            <b>Filmes em que este veículo apareceu:</b>
+            <ul className={style.Filmes}>
+              {filmNames.map((filmName, index) => (
+                <li key={index}>{filmName}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
