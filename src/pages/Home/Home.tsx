@@ -16,7 +16,7 @@ const Home = () => {
         <div className={style.ellipse2}></div>
 
         <div className={style.paragrafo}>
-          <p>Explore nossa coleção de naves espaciais lendárias, como a Millennium Falcon e o X-wing, ou mergulhe nas areias de Tatooine com os famosos speeders.
+          <p>Explore nossa coleção de veículos lendários, como a TIE/LN starfighter, ou mergulhe nas areias de Tatooine com os famosos speeders.
             Cada veículo é cuidadosamente selecionado para oferecer a você a experiência mais autêntica e emocionante possível.</p>
         </div>
         <div className={style.imageContainer2}>
