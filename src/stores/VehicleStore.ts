@@ -14,8 +14,12 @@ export class VehicleStore {
   fetchVehicleDetails = async (id: string) => {
     try {
       const response = await http.get(`vehicles/${id}`);
+      const vehicleWithImage = {
+        ...response.data,
+        image: `/vehicles/${id}.jpg`,
+      }
       runInAction(() => {
-        this.vehicle = response.data;
+        this.vehicle = vehicleWithImage;
       });
     } catch (error) {
       console.log(error);
