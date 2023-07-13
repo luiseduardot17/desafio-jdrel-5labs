@@ -1,7 +1,7 @@
 import { Link } from 'react-scroll';
 import { FaCircleArrowUp } from 'react-icons/fa6';
-import { GrCaretDown } from 'react-icons/gr';
 import style from './Home.module.css'
+import FAQ from '../../components/Faq/Faq';
 
 const Home = () => {
   return (
@@ -35,27 +35,7 @@ const Home = () => {
           <p>Não perca a oportunidade de possuir um pedaço desse universo mágico. Aventure-se pela nossa seleção, encontre o veículo dos seus sonhos e comece sua jornada épica hoje mesmo.</p>
         </div>
 
-        <div className={style.faqContainer}>
-          <h3>FAQ</h3>
-          <ul>
-            <li>
-              <p className={style.perguntas}>Quais são os veículos mais populares de Star Wars disponíveis na loja?</p>
-              <GrCaretDown />
-            </li>
-            <li>
-              <p className={style.perguntas}>Posso adquirir um modelo em escala da lendária Estrela da Morte?</p>
-              <GrCaretDown />
-            </li>
-            <li>
-              <p className={style.perguntas}>Quais são as opções de veículos terrestres inspirados em Star Wars disponíveis?</p>
-              <GrCaretDown />
-            </li>
-            <li>
-              <p className={style.perguntas}>É possível personalizar meu próprio droide astromecânico, como o R2-D2?</p>
-              <GrCaretDown />
-            </li>
-          </ul>
-        </div>
+        <FAQ/>
       </section>
       <div className={style.topButton}>
         <Link to="top" smooth={true} duration={500}>
