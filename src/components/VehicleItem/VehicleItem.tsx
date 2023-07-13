@@ -3,6 +3,7 @@ import IVehicle from "../../interfaces/IVehicles";
 import { Link } from "react-router-dom"
 import style from "./VehicleItem.module.css"
 import { formatValue } from "../../utils/utils";
+import { observer } from "mobx-react-lite";
 
 interface IVehicleItemProps {
   vehicle: IVehicle;
@@ -16,15 +17,13 @@ const VehicleItem: React.FC<IVehicleItemProps> = ({ vehicle }) => {
 
   };
 
-  const id = extractIdFromUrl(vehicle.url)
-  type URL = string;
-  const IMAGES_PATH: URL = '/vehicles/'
-  
+  const id = extractIdFromUrl(vehicle.url);
+
   return (
     <div className={style.vehicleCard}>
       <div className={style.conteudo}>
         <div className={style.vehicleImage}>
-          <img src={IMAGES_PATH + `${id}.jpg`} alt={vehicle.name} />
+          <img src={`/vehicles/${id}.jpg`} alt={vehicle.name} />
         </div>
         <div className={style.vehicleInfos}>
           <h3>{vehicle.name}</h3>
@@ -45,4 +44,4 @@ const VehicleItem: React.FC<IVehicleItemProps> = ({ vehicle }) => {
   );
 };
 
-export default VehicleItem;
+export default observer(VehicleItem);
