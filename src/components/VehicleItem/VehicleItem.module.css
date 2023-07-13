@@ -1,51 +1,61 @@
 .vehicleCard{
     width: 100%;
-    height: 400px;
+    height: 50%;
 
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
 
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(255, 255, 0, 0.2);
+    background-color: #d2d2d2;
+    border-radius: 30px;
 }
 
-.Container {
+.conteudo {
     width: 100%;
 
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    
 }
 
 .vehicleImage{
     width: 50%;
 
-    background-color: rgb(92, 87, 87);
+    border-radius: 25px 0 0 25px;
+    background-color: rgb(49, 49, 49);
 }
 
 .vehicleInfos{
     width: 50%;
-    margin-left: 5px;
-    margin-right: 10px;
 
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 
-    text-align: justify;
+    text-align: center;
+    padding: 10px;
+    color: #333;
 }
 
-.vehicleInfos span{
-    font-weight: bold;
-    color: yellow;
+.vehicleInfos h3{
+    font-size: 34px;
+    text-align: center;
+    font-weight: 800;
+    color: #333;
+}
+
+.vehicleInfos p {
+    width: 100%;
 }
 
 .Link{
-    height: 50px;
+    height: 53px;
+    flex-shrink: 0;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border-radius: 24.5px;
+    background: #3580EF;
+    color: #fff;
 }
