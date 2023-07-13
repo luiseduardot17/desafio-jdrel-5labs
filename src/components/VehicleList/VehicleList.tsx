@@ -56,6 +56,7 @@ const VehicleList = () => {
             {vehicles.length > 0  && (
                 <>
                     <div className={style.vehicleContainer}>
+                    <div className={style.ellipse}></div>
                         {vehicles.map((vehicle) => (
                             <VechicleItem key={vehicle.id} vehicle={vehicle} />
                         ))}
