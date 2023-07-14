@@ -1,9 +1,9 @@
-.vehicleCard{
-    width: 100%;
-    height: 50%;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
 
-    display: flex;
-    flex-direction: column;
+.vehicleCard {
+    width: 100%;
+    height: 30vh;
 
     border: 2px solid rgba(255, 255, 255, 0.12);
     background: rgba(255, 255, 255, 0.08);
@@ -12,47 +12,57 @@
 
 .conteudo {
     width: 100%;
+    height: 100%;
 
     display: flex;
 }
 
 .vehicleImage {
     width: 50%;
-
-    border-radius: 25px 0 0 25px;
-}
-.vehicleImage img {
-    width: 100%;
-    max-width:max-content;
     height: 100%;
 
     border-radius: 25px 0 0 25px;
 }
 
-.vehicleInfos{
+.vehicleImage img {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 25px 0 0 25px;
+}
+
+.vehicleInfos {
     width: 50%;
-    height: 50%;
+    height: 100%;
 
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     flex-wrap: wrap;
 
     text-align: center;
-    padding: 10px;
+    padding-left: 5px;
 }
 
-.vehicleInfos h3{
-    font-size: 34px;
-    text-align: center;
+.vehicleInfos h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 30px;
     font-weight: 800;
+    margin: 0;
+    text-align: left;
 }
 
 .vehicleInfos p {
     width: 100%;
+
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    text-align: left;
 }
 
-.Link{
-    height: 53px;
+.Link {
+    height: 100%;
     flex-shrink: 0;
 
     text-align: center;
@@ -64,4 +74,71 @@
     border-radius: 24.5px;
     background: #3580EF;
     color: #fff;
+}
+
+@media screen and (max-width: 1440px) {}
+
+@media screen and (max-width: 1024px) {}
+
+@media screen and (max-width: 768px) {
+    .vehicleCard {
+        width: 90%;
+        height: 40vh;
+    }
+
+    .vehicleInfos h3 {
+        font-size: 28px;
+    }
+
+    .vehicleInfos p {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .vehicleCard {
+        height: 90vh;
+    }
+
+    .conteudo {
+        flex-direction: column;
+    }
+
+    .vehicleImage {
+        width: 100%;
+        height: 100%;
+
+        border-radius: 25px 25px 0 0;
+    }
+
+    .vehicleImage img {
+        width: 100%;
+        height: 100%;
+
+        border-radius: 25px 25px 0 0;
+    }
+
+    .vehicleInfos {
+        width: 100%;
+    }
+
+    .Link {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 375px) {}
+
+@media screen and (max-width: 320px) {
+    .vehicleInfos h3 {
+        font-size: 28px;
+    }
+
+    .vehicleInfos p {
+        font-size: 20px;
+    }
+
+    .Link {
+        font-size: 20px;
+    }
 }
