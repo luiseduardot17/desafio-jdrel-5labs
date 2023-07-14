@@ -62,10 +62,10 @@ const VehicleList = () => {
                         ))}
                     </div>
                     <div className={style.pagination}>
-                        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+                        <button className={style.buttonPagination} onClick={handlePreviousPage} disabled={currentPage === 1}>
                             Página Anterior
                         </button>
-                        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                        <button className={style.buttonPagination} onClick={handleNextPage} disabled={currentPage === totalPages}>
                             Próxima Página
                         </button>
                     </div>
