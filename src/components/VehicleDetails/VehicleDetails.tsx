@@ -5,10 +5,11 @@ import vehicleStore from '../../stores/VehicleStore';
 import http from '../../services/swapi';
 import { formatValue } from "../../utils/utils";
 import style from './VehicleDetailse.module.css'
+import Loader from '../Loader/Loader';
 
 const fetchFilmName = async (url: string) => {
   const response = await http.get(url);
-  const title = response.data?.title || "";
+  const title = response.data?.title || "indisponível";
   return { data: { title } };
 };
 
@@ -59,7 +60,7 @@ const VehicleDetails = () => {
     };
 
     getFilmNames();
-  }, []);
+  }, [id]);
 
   const handleAddToCart = () => {
     const { vehicle } = vehicleStore; // Obtem o veículo do vehicleStore
@@ -71,7 +72,7 @@ const VehicleDetails = () => {
   };
 
   if (!vehicleStore.hasVehicle) {
-    return <div>Carregando informações do veículo...</div>;
+    return <Loader/>;
   }
 
   const { name, model, manufacturer, cost_in_credits, length, max_atmosphering_speed, crew, passengers, cargo_capacity, consumables, vehicle_class, image } = vehicleStore.vehicle!;
@@ -114,7 +115,7 @@ const VehicleDetails = () => {
             <b>Fabricante</b>
           </div>
           <div>
-            <p>{max_atmosphering_speed} Km</p>
+            <p>{max_atmosphering_speed} Km/h</p>
             <b>Velocidade Máxima</b>
           </div>
         </div>
