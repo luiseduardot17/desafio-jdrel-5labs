@@ -1,9 +1,10 @@
-import SuccessScreen from "../../components/SuccessScreen/SuccessScreen"
+import SuccessScreen from "../../components/SuccessScreen/SuccessScreen";
+import style from './Success.module.css';
 
 const Success = () => {
   return (
-    <div>
-      <SuccessScreen/>
+    <div className={style.containerSuccess}>
+      <SuccessScreen />
     </div>
   )
 }
