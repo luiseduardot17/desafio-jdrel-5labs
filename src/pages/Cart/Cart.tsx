@@ -1,4 +1,5 @@
 import vehicleStore from "../../stores/VehicleStore";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { observer } from "mobx-react-lite";
@@ -7,7 +8,21 @@ import { BsCart3 } from "react-icons/bs";
 import style from './Cart.module.css'
 
 const Cart = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
   const { cartVehicles } = vehicleStore;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleRemoveFromCart = (vehicleId: string) => {
     vehicleStore.removeFromCart(vehicleId);
@@ -18,6 +33,7 @@ const Cart = () => {
       <div className={style.Order}>
         <div className={style.ellipse}></div>
         {cartVehicles.length > 0 && (
+
           <div className={style.Descritivo}>
             <h3>Veículo</h3>
             <h3>Créditos Galácticos</h3>
@@ -30,15 +46,24 @@ const Cart = () => {
             <div className={style.Item}>
               <div><h3>{vehicle.name}</h3></div>
               <div>
-                <span>{formatValue(vehicle.cost_in_credits)}</span>
+                <span className={style.Creditos}>{formatValue(vehicle.cost_in_credits)}</span>
               </div>
-              <div className={style.ContainerButton}><button onClick={() => handleRemoveFromCart(vehicle.id)}>
-                <RiDeleteBin6Line /> REMOVER
-              </button></div>
+              {windowWidth <= 428 ? (
+                <>
+                  <div className={style.ContainerButton}><button onClick={() => handleRemoveFromCart(vehicle.id)}>
+                    <RiDeleteBin6Line />
+                  </button></div>
+                </>
+              ) : (
+                <>
+                  <div className={style.ContainerButton}><button onClick={() => handleRemoveFromCart(vehicle.id)}>
+                    <RiDeleteBin6Line /> REMOVER
+                  </button></div>
+                </>
+              )}
             </div>
           </div>
         ))}
-
         {cartVehicles.length > 0 && (
           <div>
             <Link to="/checkout">
@@ -50,8 +75,7 @@ const Cart = () => {
         {cartVehicles.length == 0 && (
           <div>
             <div className={style.TextoVazio}>
-              <b>O seu carrinho está vazio. </b>
-              <span>Deseja olhar outros veículos similares?</span>
+              <b>O seu carrinho está vazio</b>
             </div>
             <div className={style.image}></div>
           </div>
@@ -63,7 +87,7 @@ const Cart = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
