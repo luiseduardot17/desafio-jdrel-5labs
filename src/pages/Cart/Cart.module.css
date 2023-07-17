@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
 
 .Container {
-    max-width: 100%;
+    width: 100%;
+
     display: flex;
     justify-content: center;
+    padding-top: 10%;
 }
 
 .Order {
-    height: 50vh;
-    width: 1243px;
+    width: 50%;
 
     display: flex;
     flex-direction: column;
@@ -18,11 +19,13 @@
     border-radius: 40px;
     border: 2px solid rgba(255, 255, 255, 0.12);
     background: rgba(0, 0, 0, 0.60);
+    gap: 20px;
+    padding-bottom: 1%;
 }
 
 .ellipse {
-    width: 1161px;
-    height: 467px;
+    width: 50%;
+    height: 50%;
     flex-shrink: 0;
 
     position: absolute;
@@ -38,40 +41,58 @@
 }
 
 .Produto {
-    width: 1000px;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
+    align-items: center;
 }
 
 .Descritivo {
-    width: 1000px;
+    width: 100%;
 
     display: flex;
     justify-content: space-between;
+    text-align: center;
 }
 
 .Descritivo h3 {
-    width: 330px;
-    text-align: center;
+    width: 100%;
 
     display: flex;
     align-items: center;
     justify-content: center;
+
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    color: #fff;
+}
+
+.Creditos {
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: #fff;
 }
 
 .Item {
-    width: 1000px;
+    width: 100%;
 
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .Item div {
-    width: 330px;
+    width: 100%;
     text-align: center;
 
     display: flex;
@@ -80,14 +101,14 @@
 }
 
 .ContainerButton button {
-    width: 200px;
-    height: 50px;
+    width: 50%;
+    height: 70%;
     flex-shrink: 0;
     background-color: #f05555cc;
 }
 
 .ButtonFecharPedido {
-    height: 53px;
+    height: 100%;
     flex-shrink: 0;
 
     text-align: center;
@@ -109,14 +130,14 @@
     font-style: normal;
     font-weight: 300;
     line-height: normal;
+    padding-top: 1%;
 
     opacity: 0.800000011920929;
 }
 
 .image {
-    width: 600px;
-    max-width: 100%;
-    height: 200px;
+    width: 100%;
+    height: 20vh;
 
     background-image: url(../../assets/bb8.png);
     background-position: center;
@@ -125,7 +146,7 @@
 }
 
 .ButtonContinuar {
-    height: 53px;
+    height: 100%;
     flex-shrink: 0;
 
     background: rgba(217, 217, 217, 0.79);
@@ -136,4 +157,107 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+}
+
+@media screen and (max-width: 1440px) {
+    .Order {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .Order {
+        width: 90%;
+    }
+
+    .Descritivo h3 {
+        font-size: 20px;
+    }
+
+    .Creditos {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .ContainerButton button {
+        width: 70%;
+    }
+
+    .Descritivo h3 {
+        font-size: 18px;
+    }
+
+    .Creditos {
+        font-size: 18px;
+    }
+
+    .ButtonFecharPedido {
+        font-size: 18px;
+    }
+
+    .ButtonContinuar {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .ContainerButton {
+        width: 100%;
+        height: 100%;
+    }
+
+    .ContainerButton button {
+        width: 50%;
+        height: 50%;
+    }
+
+    .Item div h3 {
+        height: 10vh;
+        font-size: 14px;
+
+        display: flex;
+        align-items: center;
+    }
+
+    .ButtonFecharPedido {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .Order {
+        border-radius: 20px;
+        padding-bottom: 5%;
+    }
+
+    .ContainerButton {
+        width: 25%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ContainerButton button {
+        width: 50%;
+        height: 30%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .Descritivo h3 {
+        font-size: 16px;
+    }
+
+    .ContainerButton {
+        width: 50%;
+    }
+
+    .ContainerButton button {
+        width: 60%;
+    }
+
+    .ButtonContinuar {
+        font-size: 16px;
+    }
 }
