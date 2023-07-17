@@ -130,6 +130,10 @@
 @media screen and (max-width: 375px) {}
 
 @media screen and (max-width: 320px) {
+    .vehicleCard {
+        height: 100vh;
+    }
+
     .vehicleInfos h3 {
         font-size: 28px;
     }
