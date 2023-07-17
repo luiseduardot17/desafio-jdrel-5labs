@@ -18,23 +18,7 @@ const VehicleDetails = () => {
   const navigate = useNavigate();
 
   const [filmNames, setFilmNames] = useState<string[]>([]);
-
-  const fetchFilmNames = async () => {
-    if (!vehicleStore.vehicle) {
-      return []; // Retorna um array vazio caso vehicleStore.vehicle seja nulo
-    }
-
-    const filmUrls = vehicleStore.vehicle.films;
-    const filmPromises = filmUrls.map(fetchFilmName); // Array de promises das requisições
-
-    const filmResponses = await Promise.all(filmPromises); // Aguarda todas as requisições
-
-    const filmNames = filmResponses.map((response) => {
-      return response.data?.title || ""; // Extrai o título do filme da resposta
-    });
-
-    return filmNames;
-  };
+  const [filmNamesObtained, setFilmNamesObtained] = useState(false);
 
   useEffect(() => {
     const fetchVehicleDetails = async () => {
@@ -54,13 +38,29 @@ const VehicleDetails = () => {
   }, [id, navigate]);
 
   useEffect(() => {
-    const getFilmNames = async () => {
-      const names = await fetchFilmNames();
-      setFilmNames(names);
-    };
+    const fetchFilmNames = async () => {
+      if (!vehicleStore.vehicle) {
+        return []; // Retorna um array vazio caso vehicleStore.vehicle seja nulo
+      }
 
-    getFilmNames();
-  }, [id]);
+      const filmUrls = vehicleStore.vehicle.films;
+      const filmPromises = filmUrls.map(fetchFilmName); // Array de promises das requisições
+
+      const filmResponses = await Promise.all(filmPromises); // Aguarda todas as requisições
+
+      const names = filmResponses.map((response) => {
+        return response.data?.title || ""; // Extrai o título do filme da resposta
+      });
+
+      setFilmNames(names);
+      setFilmNamesObtained(true);
+    };
+    fetchFilmNames();
+  }, [vehicleStore.vehicle]);
+
+  if (!vehicleStore.hasVehicle || !filmNamesObtained) {
+    return <Loader />;
+  }
 
   const handleAddToCart = () => {
     const { vehicle } = vehicleStore; // Obtem o veículo do vehicleStore
@@ -71,12 +71,7 @@ const VehicleDetails = () => {
     }
   };
 
-  if (!vehicleStore.hasVehicle) {
-    return <Loader/>;
-  }
-
   const { name, model, manufacturer, cost_in_credits, length, max_atmosphering_speed, crew, passengers, cargo_capacity, consumables, vehicle_class, image } = vehicleStore.vehicle!;
-
 
   return (
     <div className={style.Container}>
@@ -90,13 +85,15 @@ const VehicleDetails = () => {
       <div className={style.Nome2}>
         <h3>Sobre o {name}</h3>
         <b>Créditos Galácticos: {formatValue(cost_in_credits)}</b>
+        <div className={style.ContainerButtons}>
         <div>
-          <button className={style.ButtonAddCart} onClick={handleAddToCart}>Adicionar ao Carrinho</button>
+          <button className={style.ButtonAddCart} onClick={handleAddToCart}>Adicionar ao carrinho</button>
         </div>
         <div>
           <Link to="/vehicles">
             <button className={style.ButtonBack}>Voltar</button>
           </Link>
+        </div>
         </div>
       </div>
 
