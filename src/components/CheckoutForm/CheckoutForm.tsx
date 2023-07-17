@@ -1,12 +1,14 @@
 import { Formik, Field, Form, ErrorMessage, FormikProps } from 'formik';
 import React, { useRef } from 'react';
-import { NavigateFunction } from 'react-router-dom';
+import { Link, NavigateFunction } from 'react-router-dom';
 import * as Yup from 'yup';
 import http from '../../services/viacep';
 import ICheckoutForm from '../../interfaces/ICheckoutForm';
 import { readDbFile, writeDbFile } from '../../utils/dbUtils';
 import { saveOrder } from "../../utils/orderUtils";
 import vehicleStore from '../../stores/VehicleStore';
+import { FaBarcode } from 'react-icons/fa';
+import style from './CheckoutForm.module.css';
 
 const CheckoutForm = ({ navigate }: { navigate: NavigateFunction }) => {
     const formikRef = useRef<FormikProps<ICheckoutForm>>(null!);
@@ -26,7 +28,23 @@ const CheckoutForm = ({ navigate }: { navigate: NavigateFunction }) => {
                 const isCNPJ = numericValue.length === 14;
                 return isCPF || isCNPJ;
             }),
-        cep: Yup.string().required('O CEP é obrigatório'),
+        cep: Yup.string().required('O CEP é obrigatório')
+            .matches(/^\d{8}$/, 'CEP inválido')
+            .test('cep-validation', 'CEP não encontrado', async function (value) {
+                const cep = value.replace(/\D/g, '');
+
+                if (cep.length === 8) {
+                    try {
+                        const data = await getAddressByCep(cep);
+
+                        return !!data;
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+
+                return true;
+            }),
         numero: Yup.string().required('O número é obrigatório'),
         paymentType: Yup.string().required('Selecione o tipo de pagamento'),
         cardNumber: Yup.string().test({
@@ -47,7 +65,7 @@ const CheckoutForm = ({ navigate }: { navigate: NavigateFunction }) => {
             test: function (value) {
                 const { paymentType } = this.parent;
                 if (paymentType === 'cartao') {
-                    return !!value && /^(0[1-9]|1[0-2])\/(2[3-9]|[3-9][0-9])$/.test(value);
+                    return !!value && /^(0[0-9]|1[0-2])\/(2[3-9]|3[0-5])$/.test(value);
                 }
                 return true;
             },
@@ -64,7 +82,7 @@ const CheckoutForm = ({ navigate }: { navigate: NavigateFunction }) => {
                 return true;
             },
             message: 'Nome impresso é obrigatório',
-        }),
+        }).matches(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/, 'Por favor, insira somente letras e caracteres especiais'),
         cvv: Yup.string().test({
             name: 'cvv',
             exclusive: true,
@@ -95,11 +113,14 @@ const CheckoutForm = ({ navigate }: { navigate: NavigateFunction }) => {
         if (cep.length === 8) {
             try {
                 const data = await getAddressByCep(cep);
-
+                if (!data || data.erro) {
+                    formikRef.current.setFieldError('cep', 'CEP não encontrado');
+                  } else {
                 formikRef.current.setFieldValue('logradouro', data.logradouro || '');
                 formikRef.current.setFieldValue('bairro', data.bairro || '');
                 formikRef.current.setFieldValue('cidade', data.localidade || '');
                 formikRef.current.setFieldValue('uf', data.uf || '');
+                  }
             } catch (error) {
                 console.log(error);
             }
@@ -107,14 +128,12 @@ const CheckoutForm = ({ navigate }: { navigate: NavigateFunction }) => {
     };
 
     const handleCheckout = () => {
-        vehicleStore.clearCart(); // Esvaziar o carrinho
+        vehicleStore.clearCart();
     };
 
     const handleSubmit = async () => {
         if (formikRef.current) {
             const values = formikRef.current.values;
-            console.log('Compra efetuada!');
-            console.log(values);
             handleCheckout();
 
             const db = readDbFile();
@@ -149,86 +168,95 @@ const CheckoutForm = ({ navigate }: { navigate: NavigateFunction }) => {
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
         >
-            {({ values }) => (
-                <Form>
-                    <div>
-                        <label htmlFor="nome">Nome:</label>
-                        <Field type="text" id="nome" name="nome" maxLength={50} />
-                        <ErrorMessage name="nome" component="div" />
-                    </div>
-                    <div>
-                        <label htmlFor="email">E-mail:</label>
-                        <Field type="text" id="email" name="email" placeholder="seuemail@outlook.com" />
-                        <ErrorMessage name="email" component="div" />
-                    </div>
-                    <div>
-                        <label htmlFor="telefone">Telefone:</label>
-                        <Field type="phone" id="telefone" name="telefone" placeholder="Número com DDD" maxLength={12} onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                            const input = e.currentTarget;
-                            input.value = input.value.replace(/\D/g, '');
-                        }} />
-                        <ErrorMessage name="telefone" component="div" />
-                    </div>
-                    <div>
-                        <label htmlFor="documento">CPF/CNPJ:</label>
-                        <Field type="text" id="documento" name="documento" maxLength={14} placeholder="Somente números" />
-                        <ErrorMessage name="documento" component="div" />
-                    </div>
-                    <div>
-                        <label htmlFor="cep">CEP:</label>
-                        <Field type="text" id="cep" name="cep" onBlur={handleBlurCep} />
-                        <ErrorMessage name="cep" component="div" />
-                    </div>
-                    <div>
-                        <label htmlFor="logradouro">Endereço:</label>
-                        <Field type="text" id="logradouro" name="logradouro" component="input" />
-                        <ErrorMessage name="logradouro" component="div" />
-                    </div>
-                    <div>
-                        <label htmlFor="numero">Número:</label>
-                        <Field type="text" id="numero" name="numero" />
-                        <ErrorMessage name="numero" component="div" />
-                    </div>
-                    <div>
-                        <label htmlFor="complemento">Complemento:</label>
-                        <Field type="text" id="complemento" name="complemento" component="input" placeholder="Opcional" />
-                        <ErrorMessage name="complemento" component="div" />
-                    </div>
-                    <div>
-                        <label htmlFor="cidade">Cidade:</label>
-                        <Field type="text" id="cidade" name="cidade" component="input" />
-                        <ErrorMessage name="cidade" component="div" />
-                    </div>
-                    <div>
-                        <label htmlFor="bairro">Bairro:</label>
-                        <Field type="text" id="bairro" name="bairro" component="input" />
-                        <ErrorMessage name="bairro" component="div" />
-                    </div>
-                    <div>
-                        <label htmlFor="uf">UF:</label>
-                        <Field type="text" id="uf" name="uf" component="input" />
-                        <ErrorMessage name="uf" component="div" />
-                    </div>
-                    <div>
-                        <h3>Informações de pagamento</h3>
+            {({ values, errors }) => (
+                <Form className={style.form}>
+                    <div className={style.ellipse}></div>
+                    <div className={style.infosCadastro}>
+                        <h3>Dados cadastrais</h3>
                         <div>
+                            <label htmlFor="nome">Nome</label>
+                            <Field type="text" id="nome" name="nome" maxLength={50} />
+                            <ErrorMessage name="nome" component="div" />
+                        </div>
+                        <div>
+                            <label htmlFor="email">E-mail</label>
+                            <Field type="text" id="email" name="email" placeholder="seuemail@outlook.com" />
+                            <ErrorMessage name="email" component="div"/>
+                        </div>
+                        <div>
+                            <label htmlFor="telefone">Telefone</label>
+                            <Field type="phone" id="telefone" name="telefone" placeholder="Número com DDD" maxLength={12} onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                                const input = e.currentTarget;
+                                input.value = input.value.replace(/\D/g, '');
+                            }} />
+                            <ErrorMessage name="telefone" component="div" />
+                        </div>
+                        <div>
+                            <label htmlFor="documento">CPF/CNPJ</label>
+                            <Field type="text" id="documento" name="documento" maxLength={14} placeholder="Somente números" />
+                            <ErrorMessage name="documento" component="div" />
+                        </div>
+                        <div>
+                            <label htmlFor="cep">CEP</label>
+                            <Field type="text" id="cep" name="cep" maxLength={8} onBlur={handleBlurCep} onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                                const input = e.currentTarget;
+                                input.value = input.value.replace(/\D/g, '');
+                            }} />
+                            {errors.cep && <div>{errors.cep}</div>}
+                        </div>
+                        <div>
+                            <label htmlFor="logradouro">Endereço</label>
+                            <Field type="text" id="logradouro" name="logradouro" component="input" disabled/>
+                            <ErrorMessage name="logradouro" component="div" />
+                        </div>
+                        <div>
+                            <label htmlFor="numero">Número</label>
+                            <Field type="text" id="numero" name="numero" />
+                            <ErrorMessage name="numero" component="div" />
+                        </div>
+                        <div>
+                            <label htmlFor="complemento">Complemento</label>
+                            <Field type="text" id="complemento" name="complemento" component="input" placeholder="Opcional" />
+                            <ErrorMessage name="complemento" component="div" />
+                        </div>
+                        <div>
+                            <label htmlFor="cidade">Cidade</label>
+                            <Field type="text" id="cidade" name="cidade" component="input" disabled/>
+                            <ErrorMessage name="cidade" component="div" />
+                        </div>
+                        <div>
+                            <label htmlFor="bairro">Bairro</label>
+                            <Field type="text" id="bairro" name="bairro" component="input" disabled/>
+                            <ErrorMessage name="bairro" component="div" />
+                        </div>
+                        <div>
+                            <label htmlFor="uf">UF</label>
+                            <Field type="text" id="uf" name="uf" component="input" disabled/>
+                            <ErrorMessage name="uf" component="div" />
+                        </div>
+                    </div>
+
+                    <div className={style.infosPagamento}>
+                        <h3>Informações de pagamento</h3>
+                        <div className={style.paymentType}>
                             <label htmlFor="paymentType">Tipo de Pagamento:</label>
                             <Field as="select" id="paymentType" name="paymentType">
                                 <option value="">Selecione</option>
                                 <option value="boleto">Boleto</option>
                                 <option value="cartao">Cartão de Crédito</option>
                             </Field>
-                            <ErrorMessage name="paymentType" component="div" />
+                            <ErrorMessage name="paymentType" component="div" className={style.ErrorMessage}/>
                         </div>
                         {values.paymentType === 'boleto' && (
-                            <div>
-                                <span>O boleto estará disponivel para pagamento assim que concluir a compra.</span>
+                            <div className={style.ContainerBoleto}>
+                                <div><FaBarcode className={style.Boleto} /></div>
+                                <span>O boleto estará disponível para pagamento assim que concluir a compra.</span>
                             </div>
                         )}
                         {values.paymentType === 'cartao' && (
-                            <div>
+                            <div className={style.infosCartao}>
                                 <div>
-                                    <label htmlFor="cardNumber">Número do Cartão:</label>
+                                    <label htmlFor="cardNumber">Número do Cartão</label>
                                     <Field type="text" id="cardNumber" name="cardNumber" maxLength={19} placeholder="____ ____ ____ ____"
                                         onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
                                             const input = e.currentTarget;
@@ -242,38 +270,45 @@ const CheckoutForm = ({ navigate }: { navigate: NavigateFunction }) => {
                                             }
                                             input.value = formattedValue;
                                         }} />
-                                    <ErrorMessage name="cardNumber" component="div" />
+                                    <ErrorMessage name="cardNumber" component="div" className={style.ErrorMessage} />
                                 </div>
                                 <div>
-                                    <label htmlFor="cardExpiration">Validade:</label>
+                                    <label htmlFor="cardExpiration">Validade</label>
                                     <Field type="text" id="cardExpiration" name="cardExpiration" maxLength={5} placeholder="MM/AA" onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
                                         const input = e.currentTarget;
-                                        const value = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-                                        let formattedValue = value;
-                                        if (value.length > 2) {
-                                            formattedValue = `${value.slice(0, 2)}/${value.slice(2)}`;// Insere a barra após os dois primeiros caracteres
+                                        const value = input.value.replace(/\D/g, '');
+                                        let formattedValue = '';
+                                        for (let i = 0; i < value.length; i++) {
+                                            if (i > 0 && i % 2 === 0) {
+                                                formattedValue += '/';
+                                            }
+                                            formattedValue += value[i];
                                         }
                                         input.value = formattedValue;
                                     }} />
-                                    <ErrorMessage name="cardExpiration" component="div" />
+                                    <ErrorMessage name="cardExpiration" component="div" className={style.ErrorMessage} />
                                 </div>
                                 <div>
-                                    <label htmlFor="cardName">Nome Impresso:</label>
-                                    <Field type="text" id="cardName" name="cardName" placeholder="Igual do cartão" />
-                                    <ErrorMessage name="cardName" component="div" />
+                                    <label htmlFor="cardName">Nome Impresso</label>
+                                    <Field type="text" id="cardName" name="cardName" placeholder="Igual do cartão" maxLength={26}/>
+                                    <ErrorMessage name="cardName" component="div" className={style.ErrorMessage} />
                                 </div>
                                 <div>
-                                    <label htmlFor="cvv">CVV:</label>
+                                    <label htmlFor="cvv">CVV</label>
                                     <Field type="text" id="cvv" name="cvv" maxLength={3} placeholder="Ex: 123" onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
                                         const input = e.currentTarget;
                                         input.value = input.value.replace(/\D/g, '');
                                     }} />
-                                    <ErrorMessage name="cvv" component="div" />
+                                    <ErrorMessage name="cvv" component="div" className={style.ErrorMessage} />
                                 </div>
                             </div>
                         )}
+                        <div className={style.containerButton}>
+                        <button type="submit" className={style.buttonFinalizar}>Finalizar compra</button>
+                        <Link to='/cart'><button>Voltar</button></Link>
+                        </div>
                     </div>
-                    <button type="submit">Finalizar compra</button>
+
                 </Form>
             )}
         </Formik>
