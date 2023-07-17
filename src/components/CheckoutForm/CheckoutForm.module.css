@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+
+.form {
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+}
+
+.ellipse {
+    width: 60%;
+    height: 50%;
+    flex-shrink: 0;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+
+    border-radius: 1161px;
+    opacity: 0.44999998807907104;
+    background: linear-gradient(180deg, #C173FF 0%, #70EEFF 100%);
+    filter: blur(200px);
+}
+
+
+.ErrorMessage {
+    color: #ff0000;
+}
+
+.infosCadastro {
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.infosCadastro div {
+    height: 80%;
+    width: 70%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.infosCadastro div div {
+    /*div da validação*/
+    width: 100%;
+    color: #ff0000;
+}
+
+.infosCadastro h3 {
+    width: 90%;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    color: #FFFFFF;
+
+    border-bottom: 3px solid rgba(255, 255, 255, 0.06);
+}
+
+.infosCadastro label {
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.infosCadastro input {
+    height: 30%;
+
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.infosPagamento {
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.infosCartao {
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.infosCartao div {
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.infosCartao div div {
+    width: 100%;
+}
+
+.infosPagamento h3 {
+    width: 90%;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    color: #FFFFFF;
+
+    border-bottom: 3px solid rgba(255, 255, 255, 0.06);
+}
+
+.infosPagamento select {
+    width: 41%;
+    height: 100%;
+
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    border-radius: 5px;
+}
+
+.ContainerBoleto {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.ContainerBoleto div {
+    width: 100%;
+    height: 50%;
+
+    display: flex;
+    justify-content: center;
+}
+
+.Boleto {
+    width: 20%;
+    height: max-content;
+}
+
+.infosPagamento label {
+    width: 100%;
+
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.infosPagamento input {
+    height: 50%;
+
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.containerButton {
+    height: 10%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.buttonFinalizar {
+    height: 50%;
+    flex-shrink: 0;
+
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border-radius: 24.5px;
+    background: #3580EF;
+    color: #fff;
+}
