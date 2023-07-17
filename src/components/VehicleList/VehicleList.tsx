@@ -12,7 +12,7 @@ const VehicleList = () => {
     const [totalResults, setTotalResults] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1);
 
-    const vehiclesPerPage = 10; // Número de veículos por página
+    const vehiclesPerPage = 10;
 
     useEffect(() => {
         const fetchVehicles = async () => {
@@ -58,7 +58,7 @@ const VehicleList = () => {
                     <div className={style.vehicleContainer}>
                     <div className={style.ellipse}></div>
                         {vehicles.map((vehicle) => (
-                            <VechicleItem key={vehicle.id} vehicle={vehicle} />
+                            <VechicleItem key={vehicle.name} vehicle={vehicle} />
                         ))}
                     </div>
                     <div className={style.pagination}>
