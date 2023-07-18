@@ -5,6 +5,7 @@ import VechicleItem from '../VehicleItem/VehicleItem'
 import IApiResponse from '../../interfaces/IApiResponse'
 import style from './VehicleList.module.css'
 import Loader from '../Loader/Loader'
+import { Link } from 'react-scroll'
 
 const VehicleList = () => {
 
@@ -49,25 +50,29 @@ const VehicleList = () => {
             </div>
             {vehicles.length == 0 && (
                 <>
-                <Loader/>
+                    <Loader />
                 </>
             )}
 
-            {vehicles.length > 0  && (
+            {vehicles.length > 0 && (
                 <>
                     <div className={style.vehicleContainer}>
-                    <div className={style.ellipse}></div>
+                        <div className={style.ellipse}></div>
                         {vehicles.map((vehicle) => (
                             <VechicleItem key={vehicle.name} vehicle={vehicle} />
                         ))}
                     </div>
                     <div className={style.pagination}>
-                        <button className={style.buttonPagination} onClick={handlePreviousPage} disabled={currentPage === 1}>
-                            Página Anterior
-                        </button>
-                        <button className={style.buttonPagination} onClick={handleNextPage} disabled={currentPage === totalPages}>
-                            Próxima Página
-                        </button>
+                        <Link to="top" smooth={true} duration={1000}>
+                            <button className={style.buttonPagination} onClick={handlePreviousPage} disabled={currentPage === 1}>
+                                Página Anterior
+                            </button>
+                        </Link>
+                        <Link to="top" smooth={true} duration={1000}>
+                            <button className={style.buttonPagination} onClick={handleNextPage} disabled={currentPage === totalPages}>
+                                Próxima Página
+                            </button>
+                        </Link>
                     </div>
                 </>
             )}
