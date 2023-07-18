@@ -1,9 +1,20 @@
 .loader {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 50vh;
+}
+
+.loader div{
+    width: 50%;
+    margin-top: 20vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .loader img {
@@ -20,7 +31,7 @@
     color: #FFF;
     text-align: center;
     font-family: 'Inter', sans-serif;
-    font-size: 28px;
+    font-size: 24px;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
