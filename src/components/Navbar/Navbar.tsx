@@ -29,7 +29,7 @@ const Navbar = () => {
       <div className={style.ellipse}></div>
       <div className={style.navbar}>
         <div className={style.image}></div>
-        {windowWidth <= 428 ? (
+        {windowWidth <= 768 ? (
           <>
             <span className={`${style.hamburguerButton} ${isMenuOpen ? style.open : ''}`} onClick={toggleMenu}>
               {isMenuOpen ? <BsXLg size={30}/> : <GiHamburgerMenu size={30}/>}
