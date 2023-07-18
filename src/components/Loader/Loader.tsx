@@ -4,8 +4,10 @@ import loadingImage from '../../assets/cloud-car-v2.png'
 const Loader = () => {
     return (
         <div className={style.loader}>
-            <span className={style.texto}>Carregando ...</span>
-            <img src={loadingImage} alt="Loading" />
+            <div>
+                <span className={style.texto}>CARREGANDO...</span>
+                <img src={loadingImage} alt="Loading" />
+            </div>
         </div>
     )
 }
