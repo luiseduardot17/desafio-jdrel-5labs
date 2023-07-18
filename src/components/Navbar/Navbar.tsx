@@ -42,8 +42,8 @@ const Navbar = () => {
                 <Link to="/vehicles" onClick={toggleMenu}>
                   Veículos
                 </Link>
-                <Link to="/" onClick={toggleMenu}>
-                  Sobre
+                <Link to="#" onClick={toggleMenu}>
+                  Ajuda
                 </Link>
                 <Link to="/cart">
                   <button className={style.buttonCart}>
@@ -58,7 +58,7 @@ const Navbar = () => {
             <nav className={style.nav}>
               <Link to="/">Início</Link>
               <Link to="/vehicles">Veículos</Link>
-              <Link to="/">Sobre</Link>
+              <Link to="#">Ajuda</Link>
             </nav>
             <div className={style.divButton}>
               <Link to="/cart">
