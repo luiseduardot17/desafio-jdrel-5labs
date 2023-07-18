@@ -35,11 +35,12 @@ const Home = () => {
           <p>Não perca a oportunidade de possuir um pedaço desse universo mágico. Aventure-se pela nossa seleção, encontre o veículo dos seus sonhos e comece sua jornada épica hoje mesmo.</p>
         </div>
 
-        <FAQ/>
+        <FAQ />
       </section>
+
       <div className={style.topButton}>
         <Link to="top" smooth={true} duration={500}>
-          <button><FaCircleArrowUp /> Voltar ao topo</button>
+          <button><FaCircleArrowUp className={style.icone} /></button>
         </Link>
       </div>
     </div>

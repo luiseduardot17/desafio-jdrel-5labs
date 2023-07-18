@@ -110,7 +110,10 @@
     }
 
     .pagination {
-        gap: 10px;
+        gap: 5px;
+    }
+    .buttonPagination {
+        font-size: 18px;
     }
 }
 

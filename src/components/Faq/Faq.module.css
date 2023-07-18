@@ -149,7 +149,7 @@
 
 @media screen and (max-width: 320px) {
     .faqContainer {
-        height: 65vh;
+        height: 100vh;
     }
 
     .faqContainer h3 {

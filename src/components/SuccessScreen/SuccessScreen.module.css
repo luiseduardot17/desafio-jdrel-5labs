@@ -135,4 +135,15 @@
     }
 }
 
-@media screen and (max-width: 320px) {}
+@media screen and (max-width: 320px) {
+    .containerOrder {
+        height: 100%;
+        margin-top: 10vh;
+    }
+
+    .pedido h3 {
+        width: 70%;
+
+        font-size: 18px;
+    }
+}
