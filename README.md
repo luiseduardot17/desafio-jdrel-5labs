@@ -4,16 +4,16 @@
 
 ## 🧩 Tecnologias utilizadas:
 
-- <a href="https://npmjs.com/package/axios" target="_blank">Axios</a>
-- <a href="https://formik.org/" target="_blank">Formik</a>
-- <a href="https://mobx.js.org/README.html" target="_blank">MobX</a>
-- <a href="https://react.dev/" target="_blank">ReactJS</a>
-- <a href="https://npmjs.com/package/react-dom" target="_blank">React Dom</a>
-- <a href="https://npmjs.com/package/react-router-dom" target="_blank">React Router Dom</a>
-- <a href="https://npmjs.com/package/react-scroll" target="_blank">React Scroll</a>
-- <a href="https://react-icons.github.io/react-icons/" target="_blank">React Icons</a>
-- <a href="https://typescriptlang.org/" target="_blank">Typescript</a>
-- <a href="https://npmjs.com/package/yup?activeTab=readme" target="_blank">Yup</a>
+- <a href="https://npmjs.com/package/axios" target="_blank" rel="noopener noreferrer">Axios</a>
+- <a href="https://formik.org/" target="_blank" rel="noopener noreferrer">Formik</a>
+- <a href="https://mobx.js.org/README.html" target="_blank" rel="noopener noreferrer">MobX</a>
+- <a href="https://react.dev/" target="_blank" rel="noopener noreferrer">ReactJS</a>
+- <a href="https://npmjs.com/package/react-dom" target="_blank" rel="noopener noreferrer">React Dom</a>
+- <a href="https://npmjs.com/package/react-router-dom" target="_blank" rel="noopener noreferrer">React Router Dom</a>
+- <a href="https://npmjs.com/package/react-scroll" target="_blank" rel="noopener noreferrer">React Scroll</a>
+- <a href="https://react-icons.github.io/react-icons/" target="_blank" rel="noopener noreferrer">React Icons</a>
+- <a href="https://typescriptlang.org/" target="_blank" rel="noopener noreferrer">Typescript</a>
+- <a href="https://npmjs.com/package/yup?activeTab=readme" target="_blank" rel="noopener noreferrer">Yup</a>
 
 ## 📝 Sobre o desafio:
 
@@ -99,11 +99,9 @@ Os dados mockados que foram salvos no Local Storage da aplicação devem ser exi
 
 Lembre-se de que essa opção está disponível apenas no mesmo navegador em que os dados foram armazenados e não é compartilhada com outros navegadores ou dispositivos.
 
-<p align="center">
-
-![image](https://github.com/luiseduardot17/desafio-jdrel-5labs/assets/102761201/394de700-1eb7-4865-b186-66b784726779)
-
-</p>
+<div style="text-align: center;">
+<img src="https://github.com/luiseduardot17/desafio-jdrel-5labs/assets/102761201/394de700-1eb7-4865-b186-66b784726779" alt="captura de tela localstorage" />
+</div>
 
 ## 📥 Como instalar e usar o projeto:
 
@@ -132,4 +130,4 @@ Finalmente, execute o projeto:
 npm run dev
 ```
 
-> Esse é um desafio de <a href="http://jdrel.com.br/" target="_blank">JDREL/5Labs</a>
+<p>Esse é um desafio de <a href="http://jdrel.com.br/" target="_blank" rel="noopener noreferrer">JDREL/5Labs</a></p>
