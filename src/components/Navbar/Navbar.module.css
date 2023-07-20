@@ -94,6 +94,7 @@ header {
     border-radius: 50px;
     background: rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(10px);
+    z-index: 2;
 }
 
 .image {

@@ -218,6 +218,7 @@
 
 @media screen and (max-width: 768px) {
     .ContainerImage {
+        padding-top: 3%;
         height: 50%;
     }
 
@@ -316,7 +317,7 @@
 
 @media screen and (max-width: 428px) {
     .Container {
-        padding-top: 10%;
+        padding-top: 5%;
     }
 
     .Nome {
